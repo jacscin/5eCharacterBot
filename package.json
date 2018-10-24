@@ -1,0 +1,29 @@
+{
+  "name": "mycharacterbot",
+  "version": "1.0.0",
+  "description": "a telegram bot to roll D&D 5e character status",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacscin/5eCharacterBot.git"
+  },
+  "keywords": [
+    "bot",
+    "telegram", "D&D"
+  ],
+  "author": "João Antônio <jacs@cin.ufpe.br>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacscin/5eCharacterBot/issues"
+  },
+  "homepage": "https://github.com/jacscin/5eCharacterBot#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
