@@ -5,4 +5,4 @@ cache:
   directories:
     - "node_modules" # This will tell Travis CI to cache the dependencies
 before_script: npm install now --no-save # Install Now CLI on Travis
-script: now alias --token $NOW_TOKEN --public
+script: now alias --token $NOW_TOKEN
