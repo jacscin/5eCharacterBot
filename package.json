@@ -13,7 +13,8 @@
   },
   "keywords": [
     "bot",
-    "telegram", "D&D"
+    "telegram",
+    "D&D"
   ],
   "author": "João Antônio <jacs@cin.ufpe.br>",
   "license": "ISC",
@@ -25,5 +26,8 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
+  },
+  "now": {
+    "alias": "mycharacterbot"
   }
 }
