@@ -34,15 +34,15 @@ bot.on('message', (msg) => {
 	if(!msg || msg.text == undefined)
 		return;
 
-	var words = msg.text.split(' ');
+    var words = msg.text.split(/[ @]+?/);
 
-	switch(words[0]) {
+	switch(words[0].toLowerCase()) {
 		case '/dale':
 			var output = "";
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
 				rolls[i] = roll(4);
-				output += ("\["+rolls[i].toString()+"\] => *"+sumA(3, rolls[i])+"*\n");
+				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i])+"</b>\n");
 			}
 			break;
 		default:
@@ -52,7 +52,7 @@ bot.on('message', (msg) => {
   bot.sendMessage(chat_id=msg.chat.id,
   								text=output,
   								{reply_to_message_id: msg.message_id,
-  								parse_mode: 'Markdown'}).then(() => {
+  								parse_mode: 'HTML'}).then(() => {
     // reply sent!
   });
 });
