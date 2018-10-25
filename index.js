@@ -1,6 +1,7 @@
-var express = require('express')
-var app = express()
-var bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express().use(bodyParser.json()); // creates http server
+const token = '760815256:AAG95r65CGR77pLff3k5AqKqExXu-0225Zs'; // type here your verification token
 const axios = require('axios')
 
 function roll(n) {
@@ -13,7 +14,6 @@ function roll(n) {
     return a[0] + a[1] + a[2];
 }
 
-app.use(bodyParser.json()) // for parsing application/json
 app.use(
   bodyParser.urlencoded({
     extended: true
@@ -21,7 +21,7 @@ app.use(
 ) // for parsing application/x-www-form-urlencoded
 
 //This is the route the API will call
-app.post('/', function(req, res) {
+app.post('https://mycharacterbot.herokuapp.com/', function(req, res) {
   const { message } = req.body
 
   //Each message contains "text" and a "chat" object, which has an "id" which is the chat id
