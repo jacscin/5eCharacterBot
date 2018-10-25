@@ -21,7 +21,7 @@ app.use(
 ) // for parsing application/x-www-form-urlencoded
 
 //This is the route the API will call
-app.post('/', function(req, res) {
+app.post('/worker', function(req, res) {
   const { message } = req.body
 
   //Each message contains "text" and a "chat" object, which has an "id" which is the chat id
