@@ -48,7 +48,7 @@ bot.on('message', (msg) => {
 		case '/roll':
 			var numbers = words[1].split(/d/).map(Number);
 			var rolls = roll(numbers[0], numbers[1]);
-			var output = ("["+rolls.toString()+"] => <b>"+sumA(numbers[0], rolls +"</b>\n"));
+			var output = ("["+rolls.toString()+"] => <b>"+sumA(numbers[0], rolls)+"</b>\n");
 			break;
 		default:
 			break;
