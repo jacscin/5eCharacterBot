@@ -20,3 +20,5 @@ function ParseDie(die) {
 
     return ret;
 };
+
+export { ParseRequest, ParseDie };
