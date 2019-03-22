@@ -12,8 +12,9 @@ function roll(n, f) {
 
 function sumA(a, arr) {
 	var localArr = arr.slice();
-	localArr.sort((x, y) => { return y-x });
-    var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
+    localArr.sort((x, y) => { return y-x });
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    var ret = localArr.slice(0, a).reduce(reducer);
 console.log(ret);
 	return ret;
 }
