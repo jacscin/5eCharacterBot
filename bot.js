@@ -15,7 +15,6 @@ function sumA(a, arr) {
     localArr.sort((x, y) => { return y-x });
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     var ret = localArr.slice(0, a).reduce(reducer);
-console.log(ret);
 	return ret;
 }
 
@@ -80,12 +79,12 @@ bot.on('message', (msg) => {
 			break;
 	}
 
-	bot.sendMessage(chat_id=msg.chat.id,
-  								text=output,
-  								{reply_to_message_id: msg.message_id,
-  								parse_mode: 'HTML'}).then(() => {
-    // reply sent!
-  });
+	bot.sendMessage(
+        chat_id=msg.chat.id,
+        text=output,
+        {reply_to_message_id: msg.message_id,
+        parse_mode: 'HTML'}).then(() => {
+    });
 });
 
 module.exports = bot;
