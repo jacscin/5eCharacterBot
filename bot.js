@@ -1,3 +1,5 @@
+import * as util from './util';
+
 function roll(n, f) {
 	var a = Array(n);
 	for (var i = 0; i < n; i++){
@@ -27,8 +29,6 @@ else {
 }
 
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
-
-const util = require('./util');
 
 bot.on('message', (msg) => {
 	if(!msg || msg.text == undefined)
