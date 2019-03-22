@@ -47,7 +47,6 @@ console.log(params['modifiers']);
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
                 rolls[i] = roll(4, 6);
-console.log(rolls[i]);
 				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
 			}
 			break;
@@ -57,8 +56,8 @@ console.log(rolls[i]);
             
             params['dies'].forEach(die => {
                 var curDie = ParseDie(die);
-                var roll = roll(curDie['quantity'], curDie['faces']);
-                result = curDie['modifier'] * sumA(curDie['quantity'], roll);
+                var resultArr = roll(curDie['quantity'], curDie['faces']);
+                var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
                 total += result;
                 output += ("["+die+"] => <b>"+result+"</b>\n");
             });
