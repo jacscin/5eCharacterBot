@@ -29,7 +29,7 @@ function ParseDie(die) {
     if(!die == undefined)
         return null;
 
-    if (isNaN(parseInt(die[0])))
+    if (!isNaN(parseInt(die[0])))
         die = '+'+die;
 
     var ret = {
