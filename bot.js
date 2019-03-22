@@ -13,7 +13,8 @@ function roll(n, f) {
 function sumA(a, arr) {
 	var localArr = arr.slice();
 	localArr.sort((x, y) => { return y-x });
-	var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
+    var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
+console.log(ret);
 	return ret;
 }
 
