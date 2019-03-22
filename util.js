@@ -3,9 +3,9 @@ function ParseRequest(msg) {
         return null;
 
     var ret = {
-        'command': (/(\/[a-z]+)/i).exec(msg.text),
-        'dies': (/([+-]*[1-9]+?[0-9]*d[1-9]+?[0-9]*)/gi).exec(msg.text),
-        'modifiers': (/([+-][1-9]+?[0-9]*(?![0-9]*d))/gi).exec(msg.text)
+        'command': (/(\/[a-z]+)/i).exec(msg.text).slice(1,-3),
+        'dies': (/([+-]*[1-9]+?[0-9]*d[1-9]+?[0-9]*)/ig).exec(msg.text).slice(1,-3),
+        'modifiers': (/([+-][1-9]+?[0-9]*(?![0-9]*d))/ig).exec(msg.text).slice(1,-3)
     };
 
     return ret;
