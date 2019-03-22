@@ -10,9 +10,7 @@ function roll(n, f) {
 function sumA(a, arr) {
 	var localArr = arr.slice(0);
 	localArr.sort((x, y) => { return y-x });
-	var ret = 0;
-	for(var i = 0; i < a; ++i)
-		ret += localArr[i];
+	var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
 	return ret.toString();
 }
 
