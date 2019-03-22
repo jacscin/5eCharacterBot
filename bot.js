@@ -59,7 +59,7 @@ console.log(params['modifiers']);
                 var resultArr = roll(curDie['quantity'], curDie['faces']);
                 var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
                 total += result;
-                output += ("["+die+"] => <b>"+result+"</b>\n");
+                output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
             });
             var modResult = 0;
             params['modifiers'].forEach(mod => {
