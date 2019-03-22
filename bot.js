@@ -61,7 +61,9 @@ bot.on('message', (msg) => {
                 output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
             });
 
-            output += ("<b>Modifiers</b>\n");
+            if(params['modifiers'].length > 0) {
+                output += ("<b>Modifiers</b>\n");
+            }
             params['modifiers'].forEach(mod => {
                 modResult += parseInt(mod);
             });
