@@ -37,23 +37,22 @@ bot.on('message', (msg) => {
 	if(!msg || msg.text == undefined)
 		return;
 
-	var params = ParseRequest(msg);
-console.log(params['command']);
-console.log(params['dies']);
-console.log(params['modifiers']);
+    var params = ParseRequest(msg);
+    var output = "";
 	switch(params['command']) {
 		case '/dale':
-			var output = "";
+			
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
                 rolls[i] = roll(4, 6);
 				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
 			}
-			break;
-        case '/roll':
-            var total = 0;
-            var output = "";
+            break;
             
+        case '/roll':
+            var total = modResult = 0;
+
+            output += ("<b>Rolls</b>\n");
             params['dies'].forEach(die => {
                 var curDie = ParseDie(die);
                 var resultArr = roll(curDie['quantity'], curDie['faces']);
@@ -61,16 +60,18 @@ console.log(params['modifiers']);
                 total += result;
                 output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
             });
-            var modResult = 0;
+
+            output += ("<b>Modifiers</b>\n");
             params['modifiers'].forEach(mod => {
                 modResult += parseInt(mod);
             });
             total += modResult;
             output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
             output += ("[Total] => <b>"+total+"</b>");
-			break;
+            break;
+            
 		default:
-		var output = "This command is invalid, sorry.";
+		    output = "This command is invalid, sorry.";
 			break;
 	}
 
