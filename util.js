@@ -21,4 +21,7 @@ function ParseDie(die) {
     return ret;
 };
 
-export { ParseRequest, ParseDie };
+module.exports = {
+    ParseRequest: ParseRequest,
+    ParseDie: ParseDie
+};

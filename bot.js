@@ -1,4 +1,5 @@
-import { ParseRequest, ParseDie } from './util';
+var { ParseRequest } = require('./util');
+var { ParseDie } = require('./util');
 
 function roll(n, f) {
 	var a = Array(n);
