@@ -36,7 +36,9 @@ bot.on('message', (msg) => {
 		return;
 
 	var params = ParseRequest(msg);
-
+    console.log(params['command']);
+    console.log(params['dies']);
+    console.log(params['modifiers']);
 	switch(params['command']) {
 		case '/dale':
 			var output = "";
