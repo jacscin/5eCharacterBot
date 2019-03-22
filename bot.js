@@ -52,23 +52,26 @@ bot.on('message', (msg) => {
         case '/roll':
             var total = modResult = 0;
 
-            output += ("<b>Rolls</b>\n");
-            params['dies'].forEach(die => {
-                var curDie = ParseDie(die);
-                var resultArr = roll(curDie['quantity'], curDie['faces']);
-                var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
-                total += result;
-                output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
-            });
+            if(params['dies'].length > 0) {
+                output += ("<b>Rolls</b>\n");
+                params['dies'].forEach(die => {
+                    var curDie = ParseDie(die);
+                    var resultArr = roll(curDie['quantity'], curDie['faces']);
+                    var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
+                    total += result;
+                    output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
+                });
+            }
 
             if(params['modifiers'].length > 0) {
                 output += ("<b>Modifiers</b>\n");
+                params['modifiers'].forEach(mod => {
+                    modResult += parseInt(mod);
+                });
+                total += modResult;
+                output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
             }
-            params['modifiers'].forEach(mod => {
-                modResult += parseInt(mod);
-            });
-            total += modResult;
-            output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
+
             output += ("[Total] => <b>"+total+"</b>");
             break;
             
