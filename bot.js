@@ -1,4 +1,4 @@
-import * as util from './util';
+import { ParseRequest, ParseDie } from './util';
 
 function roll(n, f) {
 	var a = Array(n);
@@ -34,7 +34,7 @@ bot.on('message', (msg) => {
 	if(!msg || msg.text == undefined)
 		return;
 
-	var params = util.ParseRequest(msg);
+	var params = ParseRequest(msg);
 
 	switch(params['command']) {
 		case '/dale':
@@ -50,7 +50,7 @@ bot.on('message', (msg) => {
             var output = "";
             
             params['dies'].forEach(die => {
-                var curDie = util.ParseDie(die);
+                var curDie = ParseDie(die);
                 var roll = roll(curDie['quantity'], curDie['faces']);
                 result = curDie['modifier'] * sumA(curDie['quantity'], roll);
                 total += result;
