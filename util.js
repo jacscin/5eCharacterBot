@@ -26,8 +26,14 @@ function ParseRequest(msg) {
 };
 
 function ParseDie(die) {
+    var regex = RegExp('^[+-]');
+    var modifier = 1;
+    var auxArray = [];
+    if((auxArray = regex.exec(die)) != null){
+        modifier = parseInt(auxArray[0]+'1');
+    }
     var ret = {
-        'modifier': parseInt((/^[+-]/).exec(die)[0]+'1'),
+        'modifier': modifier,
         'quantity': parseInt((/[0-9]+/).exec(die)[0]),
         'faces': parseInt((/[0-9]+$/).exec(die)[0])
     }

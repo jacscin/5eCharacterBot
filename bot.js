@@ -14,7 +14,7 @@ function sumA(a, arr) {
 	var localArr = arr.slice();
 	localArr.sort((x, y) => { return y-x });
 	var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
-	return ret.toString();
+	return ret;
 }
 
 const token = process.env.TOKEN;
@@ -36,16 +36,17 @@ bot.on('message', (msg) => {
 		return;
 
 	var params = ParseRequest(msg);
-    console.log(params['command']);
-    console.log(params['dies']);
-    console.log(params['modifiers']);
+console.log(params['command']);
+console.log(params['dies']);
+console.log(params['modifiers']);
 	switch(params['command']) {
 		case '/dale':
 			var output = "";
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
-				rolls[i] = roll(4, 6);
-				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i])+"</b>\n");
+                rolls[i] = roll(4, 6);
+console.log(rolls[i]);
+				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
 			}
 			break;
         case '/roll':
