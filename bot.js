@@ -8,7 +8,7 @@ function roll(n, f) {
 }
 
 function sumA(a, arr) {
-	var localArr = arr.slice(0);
+	var localArr = arr.slice();
 	localArr.sort((x, y) => { return y-x });
 	var ret = localArr.slice(0, a).reduce((ret, cur) => { ret + cur });
 	return ret.toString();
@@ -28,13 +28,15 @@ else {
 
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
+const util = require('./util');
+
 bot.on('message', (msg) => {
 	if(!msg || msg.text == undefined)
 		return;
 
-    var words = msg.text.split(/[ @]+?/);
+	var params = util.ParseRequest(msg);
 
-	switch(words[0].toLowerCase()) {
+	switch(params['command']) {
 		case '/dale':
 			var output = "";
 			var rolls = Array(6);
@@ -43,12 +45,27 @@ bot.on('message', (msg) => {
 				output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i])+"</b>\n");
 			}
 			break;
-		case '/roll':
-			var numbers = words[1].split(/d/).map(Number);
-			var rolls = roll(numbers[0], numbers[1]);
-			var output = ("["+rolls.toString()+"] => <b>"+sumA(numbers[0], rolls)+"</b>\n");
+        case '/roll':
+            var total = 0;
+            var output = "";
+            
+            params['dies'].forEach(die => {
+                var curDie = util.ParseDie(die);
+                var roll = roll(curDie['quantity'], curDie['faces']);
+                result = curDie['modifier'] * sumA(curDie['quantity'], roll);
+                total += result;
+                output += ("["+die+"] => <b>"+result+"</b>\n");
+            });
+            var modResult = 0;
+            params['modifiers'].forEach(mod => {
+                modResult += parseInt(mod);
+            });
+            total += modResult;
+            output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
+            output += ("[Total] => <b>"+total+"</b>");
 			break;
 		default:
+		var output = "This command is invalid, sorry.";
 			break;
 	}
 
