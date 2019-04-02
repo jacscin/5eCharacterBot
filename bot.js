@@ -40,7 +40,6 @@ bot.on('message', (msg) => {
     var output = "";
 	switch(params['command']) {
 		case '/dale':
-			
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
                 rolls[i] = roll(4, 6);
@@ -56,9 +55,24 @@ bot.on('message', (msg) => {
                 params['dies'].forEach(die => {
                     var curDie = ParseDie(die);
                     var resultArr = roll(curDie['quantity'], curDie['faces']);
-                    var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
+                    var poolSum;
+                    var sortArr = resultArr.slice();
+                    switch (curDie['pool']) {
+                        case 'h':
+                            sortArr.sort((x, y) => { return y-x });
+                            poolSum = sortArr[0];
+                            break;
+                        case 'l':
+                            sortArr.sort((x, y) => { return x-y });
+                            poolSum = sortArr[0];
+                            break;
+                        default:
+                            poolSum = sumA(curDie['quantity'], resultArr);
+                            break;
+                    }
+                    var result = curDie['modifier'] * poolSum;
                     total += result;
-                    output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
+                    output += ("["+die+"] => ["+resultArr.toString()+"] => <b>"+result+"</b>\n");
                 });
             }
 
@@ -71,10 +85,13 @@ bot.on('message', (msg) => {
                 output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
             }
 
-            output += ("[Total] => <b>"+total+"</b>");
+            output += ("<b>Total\n"+total+"</b>");
             break;
-            
-		default:
+        
+        case null:
+            break
+
+        default:
 		    output = "This command is invalid, sorry.";
 			break;
 	}
