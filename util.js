@@ -2,9 +2,11 @@ function ParseRequest(msg) {
     if(!msg || msg.text == undefined)
         return null;
     
+    var command = (/(\/[a-z]+)/i).exec(msg.text);
+    if(command != null)
+        command = command[0].toLowerCase();
+
     var regex = RegExp('([+-]*[1-9]+?[0-9]*d[1-9]+?[0-9]*[hl]*)','ig');
-    var auxArray;
-    
     var dies = [];
     while((auxArray = regex.exec(msg.text)) != null) {
         dies.push(auxArray[0]);
@@ -17,7 +19,7 @@ function ParseRequest(msg) {
     }
 
     var ret = {
-        'command': (/(\/[a-z]+)/i).exec(msg.text)[0],
+        'command': command,
         'dies': dies,
         'modifiers': modifiers
     };

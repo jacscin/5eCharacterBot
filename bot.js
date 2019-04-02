@@ -94,7 +94,6 @@ bot.on('message', (msg) => {
             break;
             
 		default:
-		    output = "This command is invalid, sorry.";
 			break;
 	}
 
