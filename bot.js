@@ -34,16 +34,13 @@ else {
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
 bot.on('message', (msg) => {
-    console.log(msg);
 	if(!msg || msg.text == undefined)
 		return;
 
     var params = ParseRequest(msg);
-    console.log(params);
     var output = "";
 	switch(params['command']) {
 		case '/dale':
-			
 			var rolls = Array(6);
 			for (var i = 0; i < 6; ++i) {
                 rolls[i] = roll(4, 6);
@@ -58,23 +55,23 @@ bot.on('message', (msg) => {
                 output += ("<b>Rolls</b>\n");
                 params['dies'].forEach(die => {
                     var curDie = ParseDie(die);
-                    console.log(curDie);
                     var resultArr = roll(curDie['quantity'], curDie['faces']);
                     var poolSum;
+                    var sortArr = resultArr.slice();
+                    console.log(params);
                     switch (params['pool']) {
                         case 'h':
-                            resultArr.sort((x, y) => { return y-x });
-                            poolSum = resultArr[0];
+                            sortArr.sort((x, y) => { return y-x });
+                            poolSum = sortArr[0];
                             break;
                         case 'l':
-                            resultArr.sort((x, y) => { return x-y });
-                            poolSum = resultArr[0];
+                            sortArr.sort((x, y) => { return x-y });
+                            poolSum = sortArr[0];
                             break;
                         default:
                             poolSum = sumA(curDie['quantity'], resultArr);
                             break;
                     }
-                    console.log(poolSum);
                     var result = curDie['modifier'] * poolSum;
                     total += result;
                     output += ("["+die+"] => ["+resultArr.toString()+"] => <b>"+result+"</b>\n");
@@ -92,8 +89,12 @@ bot.on('message', (msg) => {
 
             output += ("<b>Total\n"+total+"</b>");
             break;
-            
-		default:
+        
+        case null:
+            break
+
+        default:
+		    output = "This command is invalid, sorry.";
 			break;
 	}
 
