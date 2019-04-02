@@ -40,11 +40,15 @@ function ParseDie(die) {
         numbers.push(auxArray[0]);
     }
 
+    var pool = (/[hl]+/gi).exec(die);
+    if(pool != null)
+        pool = pool[0].toLowerCase();
+
     var ret = {
         'modifier': parseInt(die[0]+'1'),
         'quantity': parseInt(numbers[0]),
         'faces': parseInt(numbers[1]),
-        'pool': (/[hl]+/gi).exec(die)[0]
+        'pool': pool
     }
 
     return ret;
