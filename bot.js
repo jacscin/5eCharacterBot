@@ -34,10 +34,12 @@ else {
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
 bot.on('message', (msg) => {
+    console.log(msg);
 	if(!msg || msg.text == undefined)
 		return;
 
     var params = ParseRequest(msg);
+    console.log(params);
     var output = "";
 	switch(params['command']) {
 		case '/dale':
@@ -70,7 +72,9 @@ bot.on('message', (msg) => {
                             break;
                         default:
                             poolSum = sumA(curDie['quantity'], resultArr);
+                            break;
                     }
+                    console.log(poolSum);
                     var result = curDie['modifier'] * poolSum;
                     total += result;
                     output += ("["+die+"] => ["+resultArr.toString()+"] => <b>"+result+"</b>\n");
