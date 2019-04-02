@@ -58,8 +58,7 @@ bot.on('message', (msg) => {
                     var resultArr = roll(curDie['quantity'], curDie['faces']);
                     var poolSum;
                     var sortArr = resultArr.slice();
-                    console.log(params);
-                    switch (params['pool']) {
+                    switch (curDie['pool']) {
                         case 'h':
                             sortArr.sort((x, y) => { return y-x });
                             poolSum = sortArr[0];
