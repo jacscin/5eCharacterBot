@@ -57,9 +57,22 @@ bot.on('message', (msg) => {
                 params['dies'].forEach(die => {
                     var curDie = ParseDie(die);
                     var resultArr = roll(curDie['quantity'], curDie['faces']);
-                    var result = curDie['modifier'] * sumA(curDie['quantity'], resultArr);
+                    var poolSum;
+                    switch (params['pool']) {
+                        case 'h':
+                            resultArr.sort((x, y) => { return y-x });
+                            poolSum = resultArr[0];
+                            break;
+                        case 'l':
+                            resultArr.sort((x, y) => { return x-y });
+                            poolSum = resultArr[0];
+                            break;
+                        default:
+                            poolSum = sumA(curDie['quantity'], resultArr);
+                    }
+                    var result = curDie['modifier'] * poolSum;
                     total += result;
-                    output += ("["+die+"] => ["+resultArr.toString()+"] <b>"+result+"</b>\n");
+                    output += ("["+die+"] => ["+resultArr.toString()+"] => <b>"+result+"</b>\n");
                 });
             }
 
@@ -72,7 +85,7 @@ bot.on('message', (msg) => {
                 output += ("["+params['modifiers'].toString()+"] => <b>"+modResult+"</b>\n");
             }
 
-            output += ("[Total] => <b>"+total+"</b>");
+            output += ("<b>Total\n"+total+"</b>");
             break;
             
 		default:
