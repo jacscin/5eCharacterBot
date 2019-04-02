@@ -56,6 +56,7 @@ bot.on('message', (msg) => {
                 output += ("<b>Rolls</b>\n");
                 params['dies'].forEach(die => {
                     var curDie = ParseDie(die);
+                    console.log(curDie);
                     var resultArr = roll(curDie['quantity'], curDie['faces']);
                     var poolSum;
                     switch (params['pool']) {
