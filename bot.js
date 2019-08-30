@@ -91,7 +91,7 @@ bot.on('message', (msg) => {
         case '/dalepool':
             var rolls = Array(6);
             for (var i = 0; i < 6; ++i) {
-                rolls[i] = roll(parseInt(params['poolOptions']), 6);
+                rolls[i] = roll(parseInt(params['poolOptions'][i]), 6);
                 output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
             }
             break;
