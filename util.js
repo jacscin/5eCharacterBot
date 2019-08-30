@@ -18,10 +18,17 @@ function ParseRequest(msg) {
         modifiers.push(auxArray[0]);
     }
 
+    regex = RegExp('[0-9]','ig');
+    var poolOptions = [];
+    while((auxArray = regex.exec(msg.text)) != null) {
+        poolOptions.push(auxArray[0]);
+    }
+
     var ret = {
         'command': command,
         'dies': dies,
-        'modifiers': modifiers
+        'modifiers': modifiers,
+        'poolOptions': poolOptions
     };
 
     return ret;
