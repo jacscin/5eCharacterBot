@@ -88,8 +88,16 @@ bot.on('message', (msg) => {
             output += ("<b>Total\n"+total+"</b>");
             break;
         
+        case '/dalepool':
+            var rolls = Array(6);
+            for (var i = 0; i < 6; ++i) {
+                rolls[i] = roll(parseInt(params['poolOptions']), 6);
+                output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
+            }
+            break;
+
         case null:
-            break
+            break;
 
         default:
 		    output = "This command is invalid, sorry.";
