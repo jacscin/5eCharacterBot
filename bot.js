@@ -90,11 +90,12 @@ bot.on('message', (msg) => {
             break;
         
         case '/dalepool':
-            var rolls = Array(6);
-            for (var i = 0; i < 6; ++i) {
-                rolls[i] = roll(parseInt(params['poolOptions']), 6);
-                output += ("["+rolls[i].toString()+"] => <b>"+sumA(3, rolls[i]).toString()+"</b>\n");
-            }
+            var rolls = Array();
+            params['poolOptions'].forEach(opt => {
+                rolls.push(roll(parseInt(opt), 6));
+                lastElm = rolls.pop();
+                output += ("["+lastElm+"] => <b>"+sumA(3, lastElm).toString()+"</b>\n");
+            });
             break;
 
         case null:
